@@ -1,0 +1,54 @@
+\section{Multi-Commodity Flows}
+
+\subsection{Formulation}
+
+We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$  from the root node to every other node with weight $0$:
+
+\[V' = V \cup \{v_0\}\]
+\[E' = E \cup \{(v_0,i) : i \in V\}\]
+\[\forall i \in V : w_{v_0i} = 0 \]
+
+\subsection{Variables}
+
+\begin{itemize}
+	\item $x_{e}$ : Edge decision variable
+	\item $y_{ij}$ : Arc decision variable
+	\item $f_{ij}$ : Flow variable
+\end{itemize}
+
+\subsection{Constraints}
+
+\[ \forall e = \{i,j\} \in V' : x_e = y_{ij} + y_{ji} \addtag \]
+\[ \forall m \in V : \sum_{j \in V,j \neq v_0}f^m_{v_0j} = 1 \addtag \]
+\[ \sum_{m \in V}\sum_{i \in V,i \neq m}f^m_{im} = k\]
+\[ \forall j,m \in V, j \neq m : \sum_{i \in V, i \neq j}f^m_{ij} - \sum_{i \in V, i \neq j}f^m_{ji} \addtag \]
+\[ \forall (i,j) \in E' : 0 \leq f^m_{ij} \leq y_{ij} \addtag \]
+\[ \forall (i,j) \in E' : y_{ij} \in \{0,1\} \addtag \]
+
+\vspace{2.5cm}
+
+\subsection{Results}
+
+For an explanation of the different columns, see section \ref{4:4}.
+
+\vspace{0.5cm}
+
+\begin{tabular}{ c | c | c | c | c | c | c }
+	instance & k & exp.optimum & obj.value & w8.sum & cpu.time & bnb.nodes \\ 
+	\hline
+	g01.dat & 2 & 46 & 46 & 46 & 0.04 & 0 \\
+	g01.dat & 5 & 477 & 477 & 477 & 0.14 & 0 \\
+	g02.dat & 4 & 373 & 373 & 373 & 0.57 & 389 \\
+	g02.dat & 10 & 1390 & 1390 & 1390 & 1.08 & 0 \\
+	g03.dat & 10 & 725 & 725 & 725 & 16.33 & 1039 \\
+	g03.dat & 25 & 3074 & 3074 & 3074 & 31.22 & 0 \\
+	g04.dat & 14 & 909 & 909 & 909 & 251.16 & 779 \\
+	g04.dat & 35 & 3292 & 3292 & 3292 & 407.32 & 153 \\
+	g05.dat & 20 & 1235 & 1234 & 1235 & 847.35 & 618 \\
+	g05.dat & 50 & 4898 & 4898 & 4898 & 1263.32 & 0 \\
+\end{tabular}
+
+\vspace{0.5cm}
+
+\textbf{Note}: Same as with the SCF \textit{obj.value} sometimes differs from the \textit{w8.sum} by being 1 off. For some instances, $getNnodes()$ seems to return a (most likely) wrong 0 as number of Branch-and-Bound nodes. CPLEX does not terminate for instances \textit{g06}, \textit{g07} and \textit{g08}.
+
