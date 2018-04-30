@@ -18,8 +18,8 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
 
 \subsection{Constraints}
 \[\forall e = \{i,j\} \in V' : x_e = y_{ij} + y_{ji} \addtag \]
-\[\sum_{j,j \neq v_0}f_{v_0j} = k \addtag \]
-\[\sum_{j,j \neq v_0}x_{(v_0,j)} = 1\]
+\[\sum_{j \in V}f_{v_0j} = k \addtag \]
+\[\sum_{j \in V}x_{(v_0,j)} = 1 \addtag \]
 \[\forall j \in V : 0 \leq \sum_{i \in V,i \neq j}f_{ij} - \sum_{i \in V,i \neq j}f_{ji} \leq 1 \addtag \]
 \[\sum_{j \in V}(\sum_{i \in V,i \neq j}f_{ij} - \sum_{i \in V,i \neq j}f_{ji}) = k \addtag \]
 \[\forall (i,j) \in E' : 0 \leq f_{ij} \leq y_{ij}*k \addtag \]
@@ -30,9 +30,13 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
 	\item (2) : Guarantees that exactly $k$ tokens are being produced by the artificial root node $v_0$ 
 	\item (3) : Guarantees that only one edge between artificial root node $v_0$ and any other node is selected
 	\item (4) : Different from the ordinary MST, in the kMST not every node has to consume a token. With 4 we define that every node may consume up to one token or none.
-	\item (5) : This constraint guarantees that tokens can only flow on selected arcs
+	\item (5) : Guarantees that tokens can only flow on selected arcs
 	\item (6) : This is the domain constraint for the binary arc decision variable $y_ij$
 \end{itemize}
+
+\subsection{Objective}
+
+\[ min \sum_{e \in E}w_ex_e \]
 
 \subsection{Results} \label{4:4}
 
