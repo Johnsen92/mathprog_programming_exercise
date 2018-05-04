@@ -19,7 +19,7 @@
 
 \clearpage
 
-For our compact models we chose single-commodity flows and multi-commodity flows. We wrote a testbench to run the different graph instances automatically. If you want to invoke it, you can do so by calling \textit{kmst} with the following parameters:
+For our compact models we chose \textbf{Single-Commodity-Flows (SCF)} and \textbf{Multi-Commodity-Flows (MCF)}. We wrote a testbench to run the different graph instances automatically. If you want to invoke it, you can do so by calling \textit{kmst} with the following parameters (e.g.):
 
 \hspace{0.5cm}
 
@@ -33,6 +33,14 @@ Calling the first 10 test instances for MCF (2 per .dat file)
 ./kmst -m 1 -t test/test.in -n 10 
 \end{lstlisting}
 
+The test results are stored in ./res/SCF\_results.out and ./res/MCF\_results.out respectively.
+
+If you want to call one single data instance only, you can still do so by calling (e.g.):
+\begin{lstlisting}
+./kmst -m 0 -f g01.dat -k 2 
+\end{lstlisting}
+
+Again $m = 0$ for SCF and $m = 1$ for MCF. 
 
 \input{scf}
 
