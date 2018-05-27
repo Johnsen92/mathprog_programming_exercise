@@ -1,0 +1,47 @@
+\section{Cycle Elimination Constraints}
+
+\subsection{Formulation}
+
+We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$  from the root node to every other node with weight $0$:
+
+\[V' = V \cup \{v_0\}\]
+\[E' = E \cup \{(v_0,i) : i \in V\}\]
+\[\forall i \in V : w_{v_0i} = 0 \]
+
+\subsection{Variables}
+
+\begin{itemize}
+	\item $x_{e}$ : Edge decision variable
+	\item $y_{ij}$ : Arc decision variable
+	\item $z_{i}$ : Vertex decision variable
+\end{itemize}
+
+\subsection{Constraints}
+\[\forall e = \{i,j\} \in E' : x_e = y_{ij} + y_{ji} \addtag \]
+\[\forall j \in V : \sum_{i \in V}y_{(i,j)} \leq 1 \addtag \]
+\[\sum_{j \in V}y_{v_0j} = 1 \addtag \]
+\[\sum_{i \in V}y_{iv_0} = 0 \addtag \]
+\[\forall j \in V : \sum_{i \in V}y_{ij} * k \geq \sum_{i \in V}y_{ji} \addtag \]
+\[\forall j \in V : z_j = \sum_{i \in V}y_{ij} \addtag \]
+\[\sum_{i \in V}z_i = k \addtag \]
+\[\forall (i,j) \in E' : y_{ij} \in \{0,1\} \addtag \]
+
+\begin{itemize}
+	\item (1) : Establishes the connection between arc decision variable $y_{ij}$ and edge decision variable $x_e$
+	\item (2) : Guarantees that every node can have at most one incoming arc, which is a property of a directed tree
+	\item (3) : Guarantees that only one arc from the artificial root node $v_0$ to any other node is selected
+   	\item (4) : Guarantees that only no arc to the artificial root node $v_0$ from any other node is selected
+   	\item (5) : Guarantees that any non-root node can only have outgoing edges if it has incoming edges as well
+   	\item (6) : Establishes the connection between node decision variables and arcs
+   	\item (7) : Limits the total number of nodes in a solution
+	\item (8) : This is the domain constraint for the binary arc decision variable $y_ij$
+\end{itemize}
+
+\subsection{Objective}
+
+\[ min \sum_{e \in E}w_ex_e \]
+
+\subsection{Results} \label{4:4}
+
+TODO
+

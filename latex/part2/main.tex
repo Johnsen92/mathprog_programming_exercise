@@ -19,24 +19,16 @@
 
 \clearpage
 
-For our compact models we chose single-commodity flows and multi-commodity flows. We wrote a testbench to run the different graph instances automatically. If you want to invoke it, you can do so by calling \textit{kmst} with the following parameters:
+For our exponentially-sized model we chose cycle elimination constraints. We wrote a testbench to run the different graph instances automatically. If you want to invoke it, you can do so by calling \textit{kmst} with the following parameters:
 
 \hspace{0.5cm}
 
-Calling the first 10 test instances for SCF (2 per .dat file)
+Calling the first 10 test instances for CEC (2 per .dat file)
 \begin{lstlisting}
-./kmst -m 0 -t test/test.in -n 10 
+./kmst -m 2 -t test/test.in -n 10 
 \end{lstlisting}
 
-Calling the first 10 test instances for MCF (2 per .dat file)
-\begin{lstlisting}
-./kmst -m 1 -t test/test.in -n 10 
-\end{lstlisting}
-
-
-\input{scf}
-
-\input{mcf}
+\input{cec}
 
 \input{interpretation}
 \clearpage
