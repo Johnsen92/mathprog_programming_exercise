@@ -18,7 +18,7 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
 
 \subsection{Constraints}
 \[\forall e = \{i,j\} \in E' : x_e = y_{ij} + y_{ji} \addtag \]
-\[\forall j \in V : \sum_{i \in V}y_{(i,j)} \leq 1 \addtag \]
+\[\forall j \in V : \sum_{i \in V}y_{ij} \leq 1 \addtag \]
 \[\sum_{j \in V}y_{v_0j} = 1 \addtag \]
 \[\sum_{i \in V}y_{iv_0} = 0 \addtag \]
 \[\forall j \in V : \sum_{i \in V}y_{ij} * k \geq \sum_{i \in V}y_{ji} \addtag \]
