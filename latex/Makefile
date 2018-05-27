@@ -1,2 +1,5 @@
 all:
-	pdflatex main.tex
+	cd part1 && make 
+	cd ..
+	cd part2 && make
+	cd ..
