@@ -97,7 +97,7 @@ void CutCallback::cycleEliminationCuts()
 			SPResultT res = shortestPath(arcs[i].v2, arcs[i].v1);
 			int list_size = res.path.size();
 			double weight_sum = res.weight + arc_weights[i];
-			if(weight_sum < 1 - list_size*eps){
+			if(weight_sum < 1 - (list_size+1)*eps){
 				cut_counter++;
 				stringstream ss;
 				// add found violated cut to model
@@ -116,7 +116,8 @@ void CutCallback::cycleEliminationCuts()
 					LazyConsI::add(expr_cec_cut <= list_size + list_size*eps);
 				else 
 					UserCutI::add(expr_cec_cut <= list_size + list_size*eps);
-				//cout << "Added constraint " << ss.str() << endl;
+				cout << "Added constraint " << ss.str() << endl;
+				cout << weight_sum << " < " << 1 - list_size*eps << endl;
 				expr_cec_cut.end();
 			}
 		}

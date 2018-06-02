@@ -136,7 +136,7 @@ void kMST_ILP::solve()
 	}
 
 	// add node sum constraint to model
-	model.add(expr_node_sum == k);
+	model.add(expr_node_sum >= k);
 	expr_node_sum.end();
 
 	// add objective function to model

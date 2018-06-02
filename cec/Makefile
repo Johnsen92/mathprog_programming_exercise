@@ -103,7 +103,7 @@ doc: all
 	doxygen doc/doxygen.cfg
 
 run: all
-	./kmst -f data/g06.dat -k 40
+	./kmst -f data/g05.dat -k 50
 
 # ------ include dependency file ---------------------------------------------------
 include depend.in
