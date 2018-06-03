@@ -36,7 +36,7 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
    	\item (6) : Establishes the connection between node decision variables and arcs
    	\item (7) : Limits the total number of nodes in a solution
 	\item (8) : This is the domain constraint for the binary arc decision variable $y_ij$
-	\item (9) : Strengthening constraint that limits the total number of edges that can be selected 
+	\item (9) : Strengthening constraint that limits the total number of edges that can be selected
 \end{itemize}
 
 \subsection{Objective}
@@ -45,5 +45,24 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
 
 \subsection{Results} \label{4:4}
 
-TODO
+\begin{tabular}{ c | c | c | c | c | c | c | c }
+	instance & k & exp.optimum & obj.value & w8.sum & cpu.time & bnb.nodes & ineq.added \\
+	\hline
+	g01.dat & 2 & 46 & 0 & 0 & 0 & 0 & 0 \\
+    g01.dat & 5 & 477 & 0 & 0 & 0 & 0 & 0 \\
+	g02.dat & 4 & 373 & 0 & 0 & 0 & 0 & 0 \\
+	g02.dat & 10 & 1390 & 0 & 0 & 0 & 0 & 0 \\
+	g03.dat & 10 & 725 & 0 & 0 & 0 & 0 & 0 \\
+	g03.dat & 25 & 3074 & 0 & 0 & 0 & 0 & 0 \\
+	g04.dat & 14 & 909 & 0 & 0 & 0 & 0 & 0 \\
+	g04.dat & 35 & 3292 & 0 & 0 & 0 & 0 & 0 \\
+	g05.dat & 20 & 1235 & 0 & 0 & 0 & 0 & 0 \\
+	g05.dat & 50 & 4898 & 0 & 0 & 0 & 0 & 0 \\
+	g06.dat & 40 & 2068 & 0 & 0 & 0 & 0 & 0 \\
+	g06.dat & 100 & 6705 & 0 & 0 & 0 & 0 & 0 \\
+	g07.dat & 60 & 1335 & 0 & 0 & 0 & 0 & 0 \\
+	g07.dat & 150 & 4534 & 0 & 0 & 0 & 0 & 0 \\
+	g08.dat & 80 & 1620 & 0 & 0 & 0 & 0 & 0 \\
+	g08.dat & 200 & 5787 & 0 & 0 & 0 & 0 & 0 \\
 
+\end{tabular}
