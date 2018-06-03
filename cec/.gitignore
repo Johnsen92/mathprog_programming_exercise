@@ -1,0 +1,4 @@
+Makefile
+kmst
+*.out
+obj/*

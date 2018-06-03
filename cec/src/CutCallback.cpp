@@ -6,6 +6,7 @@ CutCallback::CutCallback( IloEnv& _env, string _cut_type, double _eps, Instance&
 
 	u_int m = instance.n_edges;
 	arc_weights.resize( 2 * m );
+	arc_selection.resize( 2 * m );
 
 	arcs.resize( 2*m );
 	for (u_int i = 0; i < m; i++) {
@@ -90,10 +91,13 @@ void CutCallback::cycleEliminationCuts()
 		
 		for(u_int i=0; i<m*2; i++) {
 			arc_weights[i] = 1 - yval[i];
+			arc_selection[i] = false;
 		}
 
 		u_int cut_counter = 0;
 		for(u_int i=0; i<m*2 && cut_counter < 50; i++) {
+			if(arc_selection[i])
+				continue;
 			SPResultT res = shortestPath(arcs[i].v2, arcs[i].v1);
 			int list_size = res.path.size();
 			double weight_sum = res.weight + arc_weights[i];
@@ -103,10 +107,12 @@ void CutCallback::cycleEliminationCuts()
 				// add found violated cut to model
 				IloExpr expr_cec_cut(env);
 				expr_cec_cut += y[i];
+				arc_selection[i] = true;
 				ss << y[i];
 				list<u_int>::iterator ptr;
 				for(ptr = res.path.begin(); ptr != res.path.end(); ptr++){
 					expr_cec_cut += y[*ptr];
+					arc_selection[*ptr] = true;
 					ss <<  " + " << y[*ptr];
 				}
 

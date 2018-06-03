@@ -113,6 +113,7 @@ private:
 	// arc weights for shortest path computation
 	// (should be set according to current LP solution)
 	vector<double> arc_weights;
+	vector<bool> arc_selection;
 
 	vector<Arc> arcs;
 	// computes a shortest path from source to target according to arc_weights
