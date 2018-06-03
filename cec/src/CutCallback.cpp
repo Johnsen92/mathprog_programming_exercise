@@ -96,7 +96,7 @@ void CutCallback::cycleEliminationCuts()
 
 
 		// print solution
-		for(u_int i=0; i<m*2; i++){
+		/*for(u_int i=0; i<m*2; i++){
 			if(1.0 - eps < yval[i] && yval[i] < 1.0 + eps){
 				if(i < m){
 					cout << i << ": " << instance.edges[i].v1 << "-";
@@ -108,7 +108,7 @@ void CutCallback::cycleEliminationCuts()
 				}
 				
 			}
-		}
+		}*/
 
 		u_int cut_counter = 0;
 		for(u_int i=0; i<m*2 && cut_counter < 50; i++) {

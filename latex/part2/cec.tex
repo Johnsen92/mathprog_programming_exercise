@@ -23,8 +23,9 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
 \[\sum_{i \in V}y_{iv_0} = 0 \addtag \]
 \[\forall j \in V : \sum_{i \in V}y_{ij} * k \geq \sum_{i \in V}y_{ji} \addtag \]
 \[\forall j \in V : z_j = \sum_{i \in V}y_{ij} \addtag \]
-\[\sum_{i \in V}z_i = k \addtag \]
+\[\sum_{i \in V}z_i \geq k \addtag \]
 \[\forall (i,j) \in E' : y_{ij} \in \{0,1\} \addtag \]
+\[\sum_{e \in E'}x_e \geq k \addtag \]
 
 \begin{itemize}
 	\item (1) : Establishes the connection between arc decision variable $y_{ij}$ and edge decision variable $x_e$
@@ -35,6 +36,7 @@ We added an artificial root node $v_0$ to our graph and edges $(v0,i) : i \in V$
    	\item (6) : Establishes the connection between node decision variables and arcs
    	\item (7) : Limits the total number of nodes in a solution
 	\item (8) : This is the domain constraint for the binary arc decision variable $y_ij$
+	\item (9) : Strengthening constraint that limits the total number of edges that can be selected 
 \end{itemize}
 
 \subsection{Objective}

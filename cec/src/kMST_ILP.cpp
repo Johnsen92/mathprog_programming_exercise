@@ -67,7 +67,7 @@ void kMST_ILP::solve()
 	}
 
 	// add total edge constraint to model
-	model.add(expr_total_edge_constraint <= k);
+	model.add(expr_total_edge_constraint >= k);
 	expr_total_edge_constraint.end();
 
 	// root node constraints
