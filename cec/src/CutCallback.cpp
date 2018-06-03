@@ -1,4 +1,5 @@
 #include "CutCallback.h"
+#define DEBUG 0
 
 CutCallback::CutCallback( IloEnv& _env, string _cut_type, double _eps, Instance& _instance, IloBoolVarArray& _x, IloBoolVarArray& _y, IloBoolVarArray& _z ) :
 	LazyConsI( _env ), UserCutI( _env ), env( _env ), cut_type( _cut_type ), eps( _eps ), instance( _instance ), x( _x ), y( _y ), z( _z )
@@ -7,6 +8,8 @@ CutCallback::CutCallback( IloEnv& _env, string _cut_type, double _eps, Instance&
 	u_int m = instance.n_edges;
 	arc_weights.resize( 2 * m );
 	arc_selection.resize( 2 * m );
+
+	added_inequalities = 0;
 
 	arcs.resize( 2*m );
 	for (u_int i = 0; i < m; i++) {
@@ -89,11 +92,14 @@ void CutCallback::cycleEliminationCuts()
 		// TODO find violated cycle elimination cut inequalities
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
+		double ws = 0;
 		for(u_int i=0; i<m*2; i++) {
-			arc_weights[i] = 1 - yval[i];
+			arc_weights[i] = 1.0 - yval[i];
 			arc_selection[i] = false;
+			// cout << y[i] << ": " << yval[i] << endl;
+			ws += yval[i];
 		}
-
+		// cout << "Weight sum: " << ws << endl;
 
 		// print solution
 		/*for(u_int i=0; i<m*2; i++){
@@ -117,10 +123,10 @@ void CutCallback::cycleEliminationCuts()
 			SPResultT res = shortestPath(arcs[i].v2, arcs[i].v1);
 			int list_size = res.path.size();
 			double weight_sum = res.weight + arc_weights[i];
-			cout << "Resweight: " << res.weight << endl;
-			cout << weight_sum << " < " << 1 - list_size*eps << endl;
-			if(weight_sum < 1 - (list_size+1)*eps){
-				cut_counter++;
+			//cout << weight_sum << " < " << 1 - list_size*eps << endl;
+
+			if(lazy && (weight_sum < 1 - (list_size+1)*eps)){
+				cut_counter++; 
 				stringstream ss;
 				// add found violated cut to model
 				IloExpr expr_cec_cut(env);
@@ -140,11 +146,12 @@ void CutCallback::cycleEliminationCuts()
 					LazyConsI::add(expr_cec_cut <= list_size + list_size*eps);
 				else 
 					UserCutI::add(expr_cec_cut <= list_size + list_size*eps);
-				cout << "Added constraint " << ss.str() << endl;
-				// cout << weight_sum << " < " << 1 - list_size*eps << endl;
+				if(DEBUG)
+					cout << "Added constraint " << ss.str() << endl;
 				expr_cec_cut.end();
 			}
 		}
+		added_inequalities += cut_counter;
 		
 		yval.end();
 	}

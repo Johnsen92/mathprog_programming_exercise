@@ -156,10 +156,10 @@ void kMST_ILP::solve()
 
 		// set cut- and lazy-constraint-callback for
 		// cycle-elimination cuts ("cec") or directed connection cuts ("dcc")
-		CutCallback* usercb = new CutCallback( env, model_type, epOpt, instance, x, y, z );
-		//CutCallback* lazycb = new CutCallback( env, model_type, epOpt, instance, x, y, z );
-		cplex.use( (UserCutI*) usercb );
-		//cplex.use( (LazyConsI*) lazycb );
+		//CutCallback* usercb = new CutCallback( env, model_type, epOpt, instance, x, y, z );
+		CutCallback* lazycb = new CutCallback( env, model_type, epOpt, instance, x, y, z );
+		//cplex.use( (UserCutI*) usercb );
+		cplex.use( (LazyConsI*) lazycb );
 
 		// solve model
 		cout << "Calling CPLEX solve ...\n";
@@ -168,7 +168,8 @@ void kMST_ILP::solve()
 		cout << "CPLEX status: " << cplex.getStatus() << "\n";
 		cout << "Branch-and-Bound nodes: " << cplex.getNnodes() << "\n";
 		cout << "Objective value: " << cplex.getObjValue() << "\n";
-		cout << "CPU time: " << Tools::CPUtime() << "\n\n";
+		cout << "CPU time: " << Tools::CPUtime() << "\n";
+		cout << "Added inequalities: " << lazycb->added_inequalities << "\n\n";
 
 		// get variable values for edge decision variable x
 		values = IloNumArray(env, m*2);

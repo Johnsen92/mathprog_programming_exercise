@@ -155,6 +155,8 @@ public:
 		return (UserCutI *) (this);
 	}
 
+	int added_inequalities;
+
 };
 
 #endif /* CUTCALLBACK_H_ */
