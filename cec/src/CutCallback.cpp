@@ -117,6 +117,8 @@ void CutCallback::cycleEliminationCuts()
 			SPResultT res = shortestPath(arcs[i].v2, arcs[i].v1);
 			int list_size = res.path.size();
 			double weight_sum = res.weight + arc_weights[i];
+			cout << "Resweight: " << res.weight << endl;
+			cout << weight_sum << " < " << 1 - list_size*eps << endl;
 			if(weight_sum < 1 - (list_size+1)*eps){
 				cut_counter++;
 				stringstream ss;
