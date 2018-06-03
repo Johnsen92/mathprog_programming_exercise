@@ -9,6 +9,7 @@
         "ostream": "cpp",
         "fstream": "cpp",
         "exception": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "iostream": "cpp"
     }
 }

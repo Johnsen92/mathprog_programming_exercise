@@ -170,7 +170,7 @@ void kMST_ILP::solve()
 		cout << "Objective value: " << cplex.getObjValue() << "\n";
 		cout << "CPU time: " << Tools::CPUtime() << "\n\n";
 
-				// get variable values for edge decision variable x
+		// get variable values for edge decision variable x
 		values = IloNumArray(env, m*2);
 		cplex.getValues(values, y);
 

@@ -94,6 +94,22 @@ void CutCallback::cycleEliminationCuts()
 			arc_selection[i] = false;
 		}
 
+
+		// print solution
+		for(u_int i=0; i<m*2; i++){
+			if(1.0 - eps < yval[i] && yval[i] < 1.0 + eps){
+				if(i < m){
+					cout << i << ": " << instance.edges[i].v1 << "-";
+					cout << instance.edges[i].v2 << " (" << instance.edges[i].weight << ")" << endl;
+				}
+				else if(i >= m){
+					cout << i << ": " << instance.edges[i-m].v2 << "-";
+					cout << instance.edges[i-m].v1 << " (" << instance.edges[i-m].weight << ")" << endl;
+				}
+				
+			}
+		}
+
 		u_int cut_counter = 0;
 		for(u_int i=0; i<m*2 && cut_counter < 50; i++) {
 			if(arc_selection[i])
@@ -123,7 +139,7 @@ void CutCallback::cycleEliminationCuts()
 				else 
 					UserCutI::add(expr_cec_cut <= list_size + list_size*eps);
 				cout << "Added constraint " << ss.str() << endl;
-				cout << weight_sum << " < " << 1 - list_size*eps << endl;
+				// cout << weight_sum << " < " << 1 - list_size*eps << endl;
 				expr_cec_cut.end();
 			}
 		}
